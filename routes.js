@@ -5,7 +5,7 @@ const router = Router();
 const prisma = new PrismaClient()
 
 router.post("/login",async (req,res)=>{
-        res.header("Access-Control-Allow-Origin", "*")
+        res.header("Access-Control-Allow-Origin","*")
     try {
         prisma.user.findUnique(
             {
@@ -25,7 +25,7 @@ router.post("/login",async (req,res)=>{
     }
 });
 router.post("/register"),async (req,res)=>{
-    res.header("Access-Control-Allow-Origin", "*")
+    res.header("Access-Control-Allow-Origin","*")
     try {
         const user = await prisma.user.create({
             data: {
