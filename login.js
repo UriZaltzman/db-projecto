@@ -1,5 +1,5 @@
 import express from "express"
-import routes from "./routes.js"
+import routes from "./routes"
 
 const app = express()
 app.listen(app.get("port"))
