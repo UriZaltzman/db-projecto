@@ -27,13 +27,14 @@ router.post("/login",async (req,res)=>{
     router.post("/register",async (req,res)=>{
 
     res.header("Access-Control-Allow-Origin","*")
+   
     try {
         const user = await prisma.user.create({
             data: {
                 email: req.body.email,
                 password: req.body.password,
                 user_name:req.body.username,
-                surename: req.body.surename,
+                surename: req.body.lastname,
     }
     
     })
