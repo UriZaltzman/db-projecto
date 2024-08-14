@@ -15,7 +15,7 @@ router.post("/login",async (req,res)=>{
                 }
             }
         );
-        if (user) {
+        if (user != undefined) {
             res.json({message: "User logged in successfully"});
         }else{
             res.json({message:"User not found"})
