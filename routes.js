@@ -36,7 +36,11 @@ router.post("/register"),async (req,res)=>{
     }
     
     })
-    res.json("User created")
+    if (user) {
+        res.json("User created")
+    }else{
+        res.json("User not created")
+    }
 }catch(error){
         res.json(error)
     }}
