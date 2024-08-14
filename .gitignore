@@ -1,4 +1,1 @@
-*
-
-!.gitignore
-!Back/*
+node_modules/
