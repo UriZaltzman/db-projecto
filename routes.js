@@ -24,7 +24,8 @@ router.post("/login",async (req,res)=>{
         res.json(error)
     }
 });
-router.post("/register"),async (req,res)=>{
+    router.post("/register",async (req,res)=>{
+
     res.header("Access-Control-Allow-Origin","*")
     try {
         const user = await prisma.user.create({
@@ -43,7 +44,7 @@ router.post("/register"),async (req,res)=>{
     }
 }catch(error){
         res.json(error)
-    }}
+    }})
 
 
 
