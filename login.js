@@ -3,7 +3,11 @@ import routes from "./routes.js"
 import cors from "cors";
 
 const app = express()
-app.use(cors());
+const corsOptions = {
+    origin: "*",
+    optionsSuccessStatus: 200,
+    };
+app.use(cors(corsOptions));
 
 app.listen(app.get("port"))
 app.set("port",3000)
