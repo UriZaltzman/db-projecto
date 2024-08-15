@@ -7,7 +7,7 @@ const prisma = new PrismaClient()
 router.post("/login",async (req,res)=>{
         res.header("Access-Control-Allow-Origin","*")
     try {
-        prisma.user.findUnique(
+       let user = prisma.user.findUnique(
             {
                 where: {
                     email: req.body.email,
