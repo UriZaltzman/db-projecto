@@ -2,14 +2,16 @@ import express from "express";
 const app = express();
 const port = 3000;
 
-const AgregarUsuario = async(_,res)=> {
-    try{
-        const [Usuario] = await conn.query(
-            'INSERT INTO Usuario (nombre, apellido) VALUES (?, ?)'
-            [req.body.nombre, req.body.apellido]
-        );
-        res.json({ id: result.insertId})
-    }   catch (e) {
-        res.status(500).json({error: e.message});
-    }
-};
+import Usuario from "/controllers/Usuario.js"
+
+app.use(express.json());
+
+app.get("/", (_, res) => {
+    res.send("SpoTICfy API working!");
+});
+
+app.post("/nuevo", Usuario.AgregarUsuario);
+
+app.listen(port, () => {
+    console.log(`SpoTICfy API listening at http://localhost:${port}`);
+});
