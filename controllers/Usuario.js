@@ -1,9 +1,9 @@
-import { conn } from "../dbconfig.js"
+import client from "../dbconfig.js"
 
 const AgregarUsuario = async(_,res)=> {
     try{
-        const [Usuario] = await conn.query(
-            'INSERT INTO Usuario (nombre) VALUES (?)'
+        const [Usuario] = await client.query(
+            'INSERT INTO Usuario (nombre) VALUES (?)',
             [req.body.nombre]
         );
         res.json({ id: result.insertId})
