@@ -21,3 +21,7 @@ const main =()=>{
 }
 
 main()
+
+//varchar = Character Varying
+
+// CRE
