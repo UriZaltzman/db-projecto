@@ -1,19 +1,19 @@
 import client from "../dbconfig.js"
 
-const AgregarUsuario = async(_,res)=> {
+const Logearse = async(_,res)=> {
     try{
         const [Usuario] = await client.query(
-            'INSERT INTO Usuario (nombre) VALUES (?)',
-            [req.body.nombre]
+            'SELECT FROM perfil WHERE nombre = $1 AND contrasena = $2',
+            [req.body.nombre, req.body.contrasena]
         );
-        res.json({ id: result.insertId})
+        res.json('Usuario logeado')
     }   catch (e) {
-        res.status(500).json({error: e.message});
+        res.status(500).json('La contraseña o el nombre no son correctos');
     }
 };
 
 const Usuario = {
-    AgregarUsuario
+    Logearse
 };
 
 export default Usuario;

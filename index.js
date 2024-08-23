@@ -2,7 +2,7 @@ import express from "express";
 const app = express();
 const port = 5432;
 
-import Registro from "./Registro.js"
+import Registro from "./controllers/Registro.js"
 
 app.use(express.json());
 

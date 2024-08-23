@@ -1,4 +1,4 @@
-import client from "./dbconfig.js";
+import client from "../dbconfig.js";
 
 
 const AddUser = async (req, res) => {
@@ -16,6 +16,6 @@ const AddUser = async (req, res) => {
 
 const Registro = {
     AddUser
-}
+};
 
 export default Registro;
