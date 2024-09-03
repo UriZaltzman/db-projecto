@@ -15,7 +15,7 @@ app.get("/", (_, res) => {
 app.post("/nuevo", Registro.AddUser);
 
 // Logearse
-app.get("/login", Usuario.Logearse);
+app.post("/login", Usuario.Logearse);
 
 app.listen(port, () => {
     console.log(`Proyecto API listening at http://localhost:${port}`);
