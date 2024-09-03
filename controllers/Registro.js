@@ -1,7 +1,7 @@
 import client from "../dbconfig.js";
 
 
-const AddUser = async (req, res) => {
+const AddUserOld = async (req, res) => {
     try {
         const resul = await client.query(
             'INSERT INTO perfil (nombre, apellido, nick_name, mail, contrasena, saldo_cuenta, direccion, dni, nlv_uso_tecno) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *',
@@ -14,24 +14,24 @@ const AddUser = async (req, res) => {
     }
 }
 
+const AddUser = async (req, res) => {
 
-
-const { dni, nombre, apellido, contraseña } = req.body;
+const {nombre, apellido, nick_name, mail, contrasena, saldo_cuenta, direccion, dni, niv_uso_tecno  } = req.body;
 
 try {
   const queryUsuario = `
     SELECT * FROM perfil WHERE dni = $1
   `;
-  const resultado = await pool.query(queryUsuario, [usuario]);
+  const resultado = await pool.query(queryUsuario, [dni]);
 
   if (resultado.rows.length > 0) {
     res.status(400).send('El nombre de usuario ya existe. Por favor, elige otro.');
   } else {
     const queryRegistro = `
-      INSERT INTO usuario (nombre, apellido, nick_name, direccion, contraseña)
-      VALUES ($1, $2, $3, $4, $5)
+      INSERT INTO usuario (nombre, apellido, nick_name, mail, contrasena, saldo_cuenta, direccion, dni, niv_uso_tecno )
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
     `;
-    const result = await pool.query(queryRegistro, [usuario, nombre, apellido, pregunta, contraseña]);
+    const result = await pool.query(queryRegistro, [nombre, apellido, nick_name, mail, contrasena, saldo_cuenta, direccion, dni, niv_uso_tecno ]);
     res.status(201).send('Usuario registrado correctamente');
   }
 } catch (error) {
@@ -39,7 +39,7 @@ try {
   res.status(500).send('Error al registrar el usuario.');
 }
 
-
+}
 
 const Registro = {
     AddUser
