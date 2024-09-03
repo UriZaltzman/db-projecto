@@ -14,8 +14,34 @@ const AddUser = async (req, res) => {
     }
 }
 
+
+
+const { dni, nombre, apellido, contraseña } = req.body;
+
+try {
+  const queryUsuario = `
+    SELECT * FROM perfil WHERE dni = $1
+  `;
+  const resultado = await pool.query(queryUsuario, [usuario]);
+
+  if (resultado.rows.length > 0) {
+    res.status(400).send('El nombre de usuario ya existe. Por favor, elige otro.');
+  } else {
+    const queryRegistro = `
+      INSERT INTO usuario (nombre, apellido, nick_name, direccion, contraseña)
+      VALUES ($1, $2, $3, $4, $5)
+    `;
+    const result = await pool.query(queryRegistro, [usuario, nombre, apellido, pregunta, contraseña]);
+    res.status(201).send('Usuario registrado correctamente');
+  }
+} catch (error) {
+  console.error(error);
+  res.status(500).send('Error al registrar el usuario.');
+}
+
+
+
 const Registro = {
     AddUser
 };
-
 export default Registro;
