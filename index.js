@@ -1,6 +1,6 @@
 import express from "express";
 const app = express();
-const port = 5432;
+const port = 3000;
 
 import Registro from "./controllers/Registro.js"
 import Usuario from "./controllers/Usuario.js";

@@ -1,4 +1,4 @@
-import express from "express"
+/*import express from "express"
 import routes from "./routes.js"
 import cors from "cors";
 
@@ -24,4 +24,4 @@ main()
 
 //varchar = Character Varying
 
-// CRE
+// CRE */

@@ -12,5 +12,4 @@ const client = new Pool({
 });
 
 //await client.connect();
-
 export default client;
