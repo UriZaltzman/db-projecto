@@ -21,6 +21,15 @@ const Logearse = async(req ,res)=> {
     }
 };
 
+const OlvidasteContra = async(req, res) => {
+    try{
+        const hashedPassword = await bcrypt.hash(req.body.contrasena, 10);
+        
+    } catch(e){
+        res.status(500).json('No se pudo guardar correctamente la contraseña');
+    }
+};
+
 const Usuario = {
     Logearse
 };
