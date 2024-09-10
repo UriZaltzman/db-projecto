@@ -50,7 +50,7 @@ const AddUser = async (req, res) => {
         INSERT INTO perfil (nombre, apellido, nick_name, mail, contrasena, direccion, dni, nlv_uso_tecno, usuario)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *
       `;
-      const result = await pool.query(queryRegistro, [nombre, apellido, nick_name, mail, hashedPassword, direccion, dni, nlv_uso_tecno]);//usuario
+      const result = await pool.query(queryRegistro, [nombre, apellido, nick_name, mail, hashedPassword, direccion, dni, nlv_uso_tecno, usuario]);//usuario
 
       return res.status(201).json({message: 'Usuario registrado correctamente', user: result.rows[0] });
     }
