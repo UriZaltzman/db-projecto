@@ -42,7 +42,7 @@ const getSaldo = (req, res) => {
 
 // Realiza una transferencia de dinero
 const transferirDinero = (req, res) => {
-    const { transferencia, alias, cvu, descripcion } = req.body;
+    const { transferencia, alias, cvu } = req.body;
     const data = readData();
 
     if (transferencia > 0) {
