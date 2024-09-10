@@ -17,7 +17,7 @@ const AddUserOld = async (req, res) => {
 }
 
 const AddUser = async (req, res) => {
-  const { nombre, apellido, nick_name, mail, contrasena, saldo_cuenta, direccion, dni, nlv_uso_tecno, usuario } = req.body;
+  const { nombre, apellido, apodo, mail, contrasena, direccion, dni, nlv_uso_tecno} = req.body;
 
   try {
     const queryUsuario = `
@@ -31,12 +31,12 @@ const AddUser = async (req, res) => {
     const resultadomail = await pool.query(queryMail, [mail]);
 
     const queryName = `
-      SELECT * FROM perfil WHERE usuario = $1
+      SELECT * FROM perfil WHERE apodo = $1
     `;
-    const resultadonombre = await pool.query(queryName, [usuario]);
+    const resultadonombre = await pool.query(queryName, [apodo]);
 
     if (resultadonombre.rows.length > 0)
-      return res.status(400).json({ success: false, message: 'Ya esta en uso ese Usuario.' });
+      return res.status(400).json({ success: false, message: 'Ya esta en uso ese alias.' });
     if (resultadomail.rows.length > 0)
       return res.status(400).json({ success: false, message: 'Ya existe un usuario con ese mail.' });
     if (resultadodni.rows.length > 0) {
@@ -47,10 +47,10 @@ const AddUser = async (req, res) => {
       console.log(hashedPassword);
 
       const queryRegistro = `
-        INSERT INTO perfil (nombre, apellido, nick_name, mail, contrasena, direccion, dni, nlv_uso_tecno, usuario)
+        INSERT INTO perfil (nombre, apellido, apodo, mail, contrasena, direccion, dni, nlv_uso_tecno)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *
       `;
-      const result = await pool.query(queryRegistro, [nombre, apellido, nick_name, mail, hashedPassword, direccion, dni, nlv_uso_tecno, usuario]);//usuario
+      const result = await pool.query(queryRegistro, [nombre, apellido, apodo, mail, hashedPassword, direccion, dni, nlv_uso_tecno]);//usuario
 
       return res.status(201).json({message: 'Usuario registrado correctamente', user: result.rows[0] });
     }
