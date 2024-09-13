@@ -5,8 +5,8 @@ const Logearse = async(req ,res)=> {
     try{ 
         const hashedPassword = await bcrypt.hash(req.body.contrasena, 10);
         const Usuario = await pool.query(
-            'SELECT mail, contrasena FROM perfil WHERE mail = $1',
-            [req.body.nombre]
+            'SELECT mail, contrasena FROM perfil WHERE mail  = $1',
+            [req.body.mail]
         );
         if (Usuario.rows.length == 1) {
             if (await bcrypt.compare(req.body.contrasena, Usuario.rows[0].contrasena))
@@ -23,8 +23,8 @@ const Logearse = async(req ,res)=> {
 
 const OlvidasteContra = async(req, res) => {
     try{
+        const { mail } = req.body;
         const hashedPassword = await bcrypt.hash(req.body.contrasena, 10);
-        
     } catch(e){
         res.status(500).json('No se pudo guardar correctamente la contraseña');
     }

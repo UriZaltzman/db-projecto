@@ -17,7 +17,7 @@ const AddUserOld = async (req, res) => {
 }
 
 const AddUser = async (req, res) => {
-  const { nombre, apellido, mail, contrasena, direccion, dni, nlv_uso_tecno} = req.body;
+const { nombre, apellido, mail, contrasena, direccion, dni /*nlv_uso_tecno*/} = req.body;
 
   try {
     const queryUsuario = `
@@ -40,10 +40,10 @@ const AddUser = async (req, res) => {
       console.log(hashedPassword);
 
       const queryRegistro = `
-        INSERT INTO perfil (nombre, apellido, mail, contrasena, direccion, dni, nlv_uso_tecno)
+        INSERT INTO perfil (nombre, apellido, mail, contrasena, direccion, dni)
         VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *
       `;
-      const result = await pool.query(queryRegistro, [nombre, apellido, mail, hashedPassword, direccion, dni, nlv_uso_tecno]);//usuario
+      const result = await pool.query(queryRegistro, [nombre, apellido, mail, hashedPassword, direccion, dni, /*nlv_uso_tecno*/]);//usuario
 
       return res.status(201).json({message: 'Usuario registrado correctamente', user: result.rows[0] });
     }
