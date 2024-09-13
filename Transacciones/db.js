@@ -1,3 +1,5 @@
+
+import postgresql from 'pg';
 const fs = require('fs');
 const path = require('path');
 
@@ -16,3 +18,20 @@ function saveData(data) {
 }
 
 module.exports = { readData, saveData };
+
+/*
+const { Pool } = postgresql;
+
+const client = new Pool({
+    user: 'default',
+    host: 'ep-white-dust-a4ao0h56.us-east-1.aws.neon.tech',
+    database: 'wallet',
+    password: '1U0hcQmxMuTz',
+    port: 3000,
+    ssl: true
+});
+
+//await client.connect();
+export default client;
+
+*/

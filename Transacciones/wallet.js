@@ -31,10 +31,19 @@ const getTransacciones = (req, res) => {
 
 module.exports = { getSaldo, transferirDinero, getTransacciones };
 */
-
+const express = require('express');
+const app = express();
 const { readData, saveData } = require('../db');
+const { getSaldo, transferirDinero, getTransacciones } = require('./controllers/wallet.js');
 
-// Obtiene el saldo actual
+//para analizar el json
+app.use(express.json());
+
+app.get('/saldo', getSaldo);
+app.post('/transferir', transferirDinero);
+app.get('/transacciones', getTransacciones);
+
+// Obtiene el  saldo actual
 const getSaldo = (req, res) => {
     const data = readData();
     res.json({ saldo_cuenta: data.saldo_cuenta });
