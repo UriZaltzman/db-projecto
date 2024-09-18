@@ -17,8 +17,7 @@ const AddUserOld = async (req, res) => {
 }
 
 const AddUser = async (req, res) => {
-const { nombre, apellido, mail, contrasena, direccion, dni /*nlv_uso_tecno*/} = req.body;
-
+  const { nombre, apellido, mail, contrasena, direccion, dni /*nlv_uso_tecno*/} = req.body;
   try {
     const queryUsuario = `
       SELECT * FROM perfil WHERE dni = $1
