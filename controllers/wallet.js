@@ -34,7 +34,7 @@ module.exports = { getSaldo, transferirDinero, getTransacciones };
 const express = require('express');
 const app = express();
 const { readData, saveData } = require('../db');
-const { getSaldo, transferirDinero, getTransacciones } = require('./controllers/wallet.js');
+const { getSaldo, transferirDinero, getTransacciones } = require('./wallet.js');
 
 //para analizar el json
 app.use(express.json());
