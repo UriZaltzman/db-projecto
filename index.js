@@ -25,6 +25,7 @@ app.post("/nuevo", Registro.AddUser);
 
 // Logearse
 app.post("/login", Usuario.Logearse);
+app.get("/profile/:id", Usuario.Profile);
 
 app.use("/saldo", getSaldo);
 app.use("/transferir", transferirDinero);
