@@ -1,4 +1,4 @@
-import Router from "express";
+/*import Router from "express";
 import walletController from "../wallet.js";
 
 
@@ -9,3 +9,4 @@ app.post('/transferir', walletController.transferirDinero);
 app.get('/transacciones', walletController.getTransacciones);
 
 export default router;
+*/

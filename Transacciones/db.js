@@ -1,4 +1,4 @@
-
+/*
 import postgresql from 'pg';
 const fs = require('fs');
 const path = require('path');
@@ -18,7 +18,7 @@ function saveData(data) {
 }
 
 module.exports = { readData, saveData };
-
+*/
 /*
 const { Pool } = postgresql;
 
