@@ -3,19 +3,6 @@ import bcrypt from "bcryptjs"
 import Usuario from "./Usuario.js";
 
 
-const AddUserOld = async (req, res) => {
-    try {
-        const resul = await client.query(
-            'INSERT INTO perfil (nombre, apellido, nick_name, mail, contrasena, saldo_cuenta, direccion, dni, nlv_uso_tecno, usuario) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
-            [req.body.nombre, req.body.apellido, req.body.nick_name, req.body.mail, req.body.contrasena, req.body.saldo_cuenta, req.body.direccion, req.body.dni, req.body.nlv_uso_tecno, req.busuario]);
-        res.json({ id: resul.insertId })
-    }
-    catch (err) {
-        //res.status(500).json({ error: err.message });
-        console.log(err.message);
-    }
-}
-
 const AddUser = async (req, res) => {
   const { nombre, apellido, mail, contrasena, direccion, dni /*nlv_uso_tecno*/} = req.body;
   try {
@@ -40,9 +27,9 @@ const AddUser = async (req, res) => {
 
       const queryRegistro = `
         INSERT INTO perfil (nombre, apellido, mail, contrasena, direccion, dni)
-        VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *
+        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *
       `;
-      const result = await pool.query(queryRegistro, [nombre, apellido, mail, hashedPassword, direccion, dni/*nlv_uso_tecno*/]);//usuario
+      const result = await pool.query(queryRegistro, [nombre, apellido, mail, hashedPassword, direccion, dni]);//usuario
 
       return res.status(201).json({message: 'Usuario registrado correctamente', user: result.rows[0] });
     }

@@ -2,7 +2,9 @@ import pool from "../dbconfig.js"
 import bcrypt from "bcryptjs"
 import e from "express";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
 
+dotenv.config();
 
 const Logearse = async(req ,res)=> {
     try{ 
@@ -13,7 +15,7 @@ const Logearse = async(req ,res)=> {
         );
         if (Usuario.rows.length == 1) {
             if (await bcrypt.compare(req.body.contrasena, Usuario.rows[0].contrasena))
-                return res.status(200).json({ success: true, message: 'Se logeo correctamente.' });
+                return res.status(200).json({ message: 'Se logeo correctamente.' });
             else 
                 return res.status(500).json({ success: false, message: 'La contraseña o el mail son incorrecto11'});
         } else  
@@ -22,6 +24,14 @@ const Logearse = async(req ,res)=> {
         console.log(e);
         res.status(500).json('La contraseña o el usuario no son correctos');
     }
+    if(!Usuario){
+        return res.status(400).send({status:"Error", message: "Error durante el login"})
+    }
+    const token = jwt.sign(
+        {user: Usuario.user}, 
+        process.env.jwt_SECRET, 
+        {expiresIn: jwt_EXPIRATION}
+    )
 };
 
 const OlvidasteContra = async(req, res) => {
