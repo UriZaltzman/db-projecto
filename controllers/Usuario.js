@@ -2,9 +2,6 @@ import pool from "../dbconfig.js"
 import bcrypt from "bcryptjs"
 import e from "express";
 import jwt from "jsonwebtoken";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 const Logearse = async(req ,res)=> {
     try{ 
@@ -27,11 +24,12 @@ const Logearse = async(req ,res)=> {
     if(!Usuario){
         return res.status(400).send({status:"Error", message: "Error durante el login"})
     }
-    const token = jwt.sign(
-        {user: Usuario.user}, 
-        process.env.jwt_SECRET, 
-        {expiresIn: jwt_EXPIRATION}
-    )
+  
+    const token = jwt.sign({ id: usuario.id }, "tu_secreto"/*process.env.SECRET*/, {
+      expiresIn: "1d",
+    });
+  
+    res.json({ token });
 };
 
 const OlvidasteContra = async(req, res) => {
