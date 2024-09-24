@@ -21,16 +21,16 @@ const Logearse = async(req ,res)=> {
         console.log(e);
         res.status(500).json('La contraseña o el usuario no son correctos');
     }
-    if(!Usuario){
-        return res.status(400).send({status:"Error", message: "Error durante el login"})
-    }
-  
-    const token = jwt.sign({ id: usuario.id }, "tu_secreto"/*process.env.SECRET*/, {
-      expiresIn: "1d",
-    });
-  
-    res.json({ token });
-};
+        if(!Usuario){
+            return res.status(400).send({status:"Error", message: "Error durante el login"})
+        }
+    
+        const token = jwt.sign({ id: usuario.id }, "tu_secreto"/*process.env.SECRET*/, {
+        expiresIn: "1d",
+        });
+    
+        res.json({ token });
+    };
 
 const OlvidasteContra = async(req, res) => {
     const { mail } = req.body;

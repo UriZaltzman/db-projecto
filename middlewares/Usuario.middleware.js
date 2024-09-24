@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-export const verifyToken = async (req, res) => {
+export const verifyToken = async (req, res, next) => {
     const Paso1 = req.headers['authorization'];
     if(!Paso1){
         return res.status(401).json({ error: 'No hay token'})
@@ -21,4 +21,7 @@ export const verifyToken = async (req, res) => {
     if (!req.id) {
         return res.status(401).json({ error: 'Token inválido3' });
     }
-}
+
+    next();
+
+};

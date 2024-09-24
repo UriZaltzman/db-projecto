@@ -11,6 +11,7 @@ const port = 3000;
 
 import Registro from "./controllers/Registro.js";
 import Usuario from "./controllers/Usuario.js";
+import { verifyToken } from "./middlewares/Usuario.middleware.js";
 
 // Corregido: Invocar correctamente el middleware de CORS
 app.use(cors());
@@ -24,8 +25,8 @@ app.get("/", (_, res) => {
 app.post("/nuevo", Registro.AddUser);
 
 // Logearse
-app.post("/login", Usuario.Logearse);
-app.get("/profile/:id", Usuario.Profile);
+app.post("/login",verifyToken, Usuario.Logearse);
+app.get("/profile/:id",verifyToken, Usuario.Profile);
 
 app.use("/saldo", getSaldo);
 app.use("/transferir", transferirDinero);
