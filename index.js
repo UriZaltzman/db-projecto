@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors"; 
 // const bodyParser = require('body-parser');
-import bodyParser from "body-parser";
+//import bodyParser from "body-parser";
 //const walletController = require('./controllers/wallet.js');
 //import walletController from "./controllers/wallet.js"
 //onst { getSaldo, transferirDinero, getTransacciones } = require('./controllers/wallet.js');
