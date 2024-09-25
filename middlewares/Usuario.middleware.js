@@ -18,7 +18,7 @@ export const verifyToken = async (req, res, next) => {
         return res.status(401).json({ error11: 'Token inválido2', error });
     }
 
-    if (!req.id) {
+    if (!req.params.id) {
         return res.status(401).json({ error: 'Token inválido3' });
     }
 

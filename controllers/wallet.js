@@ -31,6 +31,7 @@ const getTransacciones = (req, res) => {
 
 module.exports = { getSaldo, transferirDinero, getTransacciones };
 */
+/*
 const express = require('express');
 const app = express();
 const { readData, saveData } = require('../db');
@@ -81,4 +82,4 @@ const getTransacciones = (req, res) => {
     res.json(data.transacciones);
 };
 
-module.exports = { getSaldo, transferirDinero, getTransacciones };
+module.exports = { getSaldo, transferirDinero, getTransacciones }; */
