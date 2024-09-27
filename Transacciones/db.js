@@ -9,7 +9,7 @@ function readData() {
     if (fs.existsSync(dataFilePath)) {
         const data = fs.readFileSync(dataFilePath);
         return JSON.parse(data);
-    }
+    }   
     return { saldo: 0, transacciones: [] };
 }
 

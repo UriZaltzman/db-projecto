@@ -6,7 +6,8 @@ import { verifyToken } from './middlewares/Usuario.middleware.js';
 // import { getSaldo, transferirDinero, getTransacciones } from './controllers/wallet.js';
 
 const app = express();
-const port = 3000;
+/* const port = 3000;*/
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
@@ -27,6 +28,9 @@ app.get("/profile/:id", verifyToken, Usuario.Profile);
 // app.use("/transferir", transferirDinero);
 // app.use("/transacciones", getTransacciones);
 
-app.listen(port, () => {
+/* app.listen(port, () => {
     console.log(`Proyecto API listening at http://localhost:${port}`);
+}); */
+app.listen(PORT, () => {
+    console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
