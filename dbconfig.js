@@ -4,9 +4,9 @@ const { Pool } = postgresql;
 
 const client = new Pool({
     user: 'default',
-    host: 'ep-white-dust-a4ao0h56.us-east-1.aws.neon.tech',
+    host: 'ep-frosty-smoke-a4d9wboh.us-east-1.aws.neon.tech',
     database: 'wallet',
-    password: '1U0hcQmxMuTz',
+    password: 'SMQD5quWLsh2',
     port: 5432,
     ssl: true
 });

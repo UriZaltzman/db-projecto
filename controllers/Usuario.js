@@ -3,8 +3,7 @@ import bcrypt from "bcryptjs"
 import e from "express";
 import jwt from "jsonwebtoken";
 
-
-const Logearse = async(req ,res)=> {
+/*const Logearse = async(req ,res)=> {
     try{ 
         const hashedPassword = await bcrypt.hash(req.body.contrasena, 10);
         const Usuario = await pool.query(
@@ -13,7 +12,13 @@ const Logearse = async(req ,res)=> {
         );
         if (Usuario.rows.length == 1) {
             if (await bcrypt.compare(req.body.contrasena, Usuario.rows[0].contrasena))
-                return res.status(200).json({ success: true, message: 'Se logeo correctamente.' });
+            {
+                const token = jwt.sign({ id: Usuario.rows[0].id }, "tu_secreto"/*process.env.SECRET, {
+                    expiresIn: "1d",
+                    });
+                return res.status(200).json({ message: 'Se logeo correctamente.', token });
+            }
+                
             else 
                 return res.status(500).json({ success: false, message: 'La contraseña o el mail son incorrecto11'});
         } else  
@@ -22,7 +27,10 @@ const Logearse = async(req ,res)=> {
         console.log(e);
         res.status(500).json('La contraseña o el usuario no son correctos');
     }
-};
+    if(!Usuario){
+        return res.status(400).send({status:"Error", message: "Error durante el login"})
+    }
+};*/
 
 const OlvidasteContra = async(req, res) => {
     const { mail } = req.body;
@@ -61,6 +69,36 @@ const Profile = async(req, res) => {
         });
     }
 };
+
+const Logearse = async(req, res) => {
+    try {
+        if (!req.body.mail || !req.body.contrasena) {
+            return res.status(400).json({ message: 'Correo electrónico y contraseña son requeridos.' });
+        }
+
+        const Usuario = await pool.query(
+            'SELECT id, mail, contrasena FROM perfil WHERE mail = $1',
+            [req.body.mail]
+        );
+
+        if (Usuario.rows.length == 1) {
+            const passwordMatch = await bcrypt.compare(req.body.contrasena, Usuario.rows[0].contrasena);
+
+            if (passwordMatch) {
+                const token = jwt.sign({ id: Usuario.rows[0].id }, "tu_secreto", { expiresIn: "1d" });
+                return res.status(200).json({ message: 'Se logeó correctamente.', token });
+            } else {
+                return res.status(401).json({ success: false, message: 'La contraseña o el correo electrónico son incorrectos.' });
+            }
+        } else {
+            return res.status(404).json({ success: false, message: 'El correo electrónico no está registrado.' });
+        }
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ message: 'Error durante el inicio de sesión.' });
+    }
+};
+
 
 
 const Usuario = {
