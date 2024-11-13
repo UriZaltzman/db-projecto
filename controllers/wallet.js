@@ -66,7 +66,7 @@ const transferirDinero = (req, res) => {
             cvu,
             hora_fecha: new Date().toISOString()
         });
-
+        
         // Guarda los cambios en la base de datos
         saveData(data);
         res.json({ mensaje: 'Transferencia realizada con éxito', saldo_cuenta: data.saldo_cuenta });
